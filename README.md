@@ -61,10 +61,17 @@ _________________________________________________________
 ```
 ###### *Os resultados *"cancelado"* e *"consertado"* permitem que o chamado seja reativado por meio da alteração de seu status. Já o resultado *"sem solução"* não permite que o chamado seja reativado e seu status deve permanecer *"finalizado"*.
 
+## Diagrama de Classes
+
+
+![Diagrama de classes - Call Center Manager - DPW v3](callcentermanager-dpw/assets/diagrama-de-classes-v3.png)
+
+## 
+
 ### TO DO
 
 - [ ] Permissionamento no Github para Daniel e William fazerem commits no repositório
 - [ ] Escolher se a implementação será micro serviço ou aplicação em console
 - [ ] Escolher MVC ou DDD
 - [ ] Debater melhor abordagem e iniciar o código
-- [ ] Diagrama de classes, etc...
+- [x] Diagrama de classes, etc...
