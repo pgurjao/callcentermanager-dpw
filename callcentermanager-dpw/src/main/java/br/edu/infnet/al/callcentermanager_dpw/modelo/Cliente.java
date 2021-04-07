@@ -1,5 +1,8 @@
 package br.edu.infnet.al.callcentermanager_dpw.modelo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Cliente {
 	
 	private String nome;
@@ -7,6 +10,8 @@ public class Cliente {
 	private String email;
 	private String telefone;
 	private String endereco;
+	private int idCliente;
+	private List<Produto> produtos = new ArrayList<Produto>();
 	
 	public Cliente(String nome, String cpf) {
 		this.nome = nome;
@@ -37,6 +42,34 @@ public class Cliente {
 	public boolean adicionarProduto (String cpf, int numeroSerie) {
 		
 		return true;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public String getEndereco() {
+		return endereco;
+	}
+
+	public int getIdCliente() {
+		return idCliente;
+	}
+
+	public List<Produto> getProdutos() {
+		return produtos;
 	}
 
 }

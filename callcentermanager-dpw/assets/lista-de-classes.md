@@ -1,8 +1,8 @@
 # Lista de Classes
 
-```
-Classe Chamado
 
+### Classe Chamado
+```
 - Nome cliente
 - CPF
 - Descrição resumida
@@ -18,9 +18,9 @@ Classe Chamado
 - Desativar chamado
 ```
 
-```
-Classe Cliente
 
+### Classe Cliente
+```
 - Nome
 - CPF
 - Email
