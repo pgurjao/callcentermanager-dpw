@@ -70,8 +70,12 @@ _________________________________________________________
 
 ### TO DO
 
-- [ ] Permissionamento no Github para Daniel e William fazerem commits no repositório
-- [ ] Escolher se a implementação será micro serviço ou aplicação em console
-- [ ] Escolher MVC ou DDD
-- [ ] Debater melhor abordagem e iniciar o código
+- [ ] Fazer método cliente (Paulo)
+- [ ] Fazer método Produto (Daniel)
+- [ ] Fazer método Contrato (William)
+- [ ] Fazer método Chamado (todos)
+- [x] Permissionamento no Github para Daniel e William fazerem commits no repositório
+- [x] ~~Escolher se a~~ implementação será ~~micro serviço ou~~ aplicação em console
+- [x] Escolher MVC ~~ou DDD~~
 - [x] Diagrama de classes, etc...
+- [x] Debater melhor abordagem e iniciar o código
