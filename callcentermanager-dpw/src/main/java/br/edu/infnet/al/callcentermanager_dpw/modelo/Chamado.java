@@ -19,6 +19,21 @@ public class Chamado {
 		this.produto = produto;
 		this.descricaoResumida = descricaoResumida;
 	}
+	
+	public boolean cadastrarChamado (Chamado chamado) {
+		
+		return true;
+	}
+	
+	public boolean consultarChamado (int idChamado) {
+		
+		return true;
+	}
+	
+	public boolean reativarChamado (Chamado chamado) {
+		
+		return true;
+	}
 
 	public int getIdChamado() {
 		return idChamado;
