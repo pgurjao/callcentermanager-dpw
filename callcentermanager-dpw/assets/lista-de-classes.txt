@@ -19,5 +19,13 @@ Classe Chamado
 ```
 
 ```
-Classe 
+Classe Cliente
+
+- Nome
+- CPF
+- Email
+- Endereço
+- Telefone
+- Produto(s)
+- Contrato
 ```
