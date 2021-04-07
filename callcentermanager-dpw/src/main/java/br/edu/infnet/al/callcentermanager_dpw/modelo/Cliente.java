@@ -5,12 +5,15 @@ import java.util.List;
 
 public class Cliente {
 	
+	private int idCliente;
 	private String nome;
 	private String cpf;
 	private String email;
 	private String telefone;
 	private String endereco;
-	private int idCliente;
+	private Contrato contrato;
+	private int idContrato;
+//	private List<Contrato> contratos = new ArrayList<Contrato>(); // Como associar o cliente ao contrato? Colocando o objeto Contrato como atributo, apenas o idContrato ou fazer uma lista de contratos? 
 	private List<Produto> produtos = new ArrayList<Produto>();
 	
 	public Cliente(String nome, String cpf) {
