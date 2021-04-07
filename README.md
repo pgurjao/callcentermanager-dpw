@@ -17,9 +17,9 @@ O sistema Call Center permite ao usuário cadastrar chamados, acompanhá-los, co
 
 - Linguagem Java gerenciando as dependências com Maven
 
-- Arquitetura micro serviço em API REST ou aplicação em console
+- Arquitetura: aplicação em console ~~ou micro serviço em API REST~~
 
-- Padrão MVC ou abordagem DDD
+- Padrão MVC ~~ou abordagem DDD~~
 
 - Postar em um repositório GitHub e informar os nomes dos integrantes do grupo e a [URL deste repositório](https://github.com/pgurjao/callcentermanager-dpw.git) no [fórum do Moodle](https://sae.infnet.edu.br/moodle/mod/forum/view.php?id=333858).
 
@@ -30,11 +30,15 @@ O sistema Call Center permite ao usuário cadastrar chamados, acompanhá-los, co
 
 ### Usuário (funcionário do call center) deve poder:
 
-1. Abrir chamado
-2. Reativar chamado
-3. Consultar chamado
+1. Abrir `chamado`
+2. Reativar `chamado`
+3. Consultar `chamado`
+4. Cadastrar `soluções` vinculadas aos produtos
+5. Consultar `soluções` vinculadas aos produtos
 
-O cliente deve poder consultar o status do chamado no sistema a qualquer momento.
+### Cliente deve poder:
+
+1. Consultar o status do seu(s) `chamado(s)` no sistema a qualquer momento.
 
 ### Abrir Chamado
 
@@ -70,10 +74,10 @@ _________________________________________________________
 
 ### TO DO
 
-- [ ] Fazer método cliente (Paulo)
-- [ ] Fazer método Produto (Daniel)
-- [ ] Fazer método Contrato (William)
-- [ ] Fazer método Chamado (todos)
+- [ ] Fazer método `Cliente` (Paulo)
+- [ ] Fazer método `Produto` (Daniel)
+- [ ] Fazer método `Contrato` (William)
+- [ ] Fazer método `Chamado` (todos)
 - [x] Permissionamento no Github para Daniel e William fazerem commits no repositório
 - [x] ~~Escolher se a~~ implementação será ~~micro serviço ou~~ aplicação em console
 - [x] Escolher MVC ~~ou DDD~~
