@@ -55,9 +55,9 @@ O sistema Call Center permite ao usuário cadastrar chamados, acompanhá-los, co
 
 | Status | Resultado do atendimento |
 | ----------- | :----: |
-| Cadastrado |   |
-| Em atendimento |   |
-| Finalizado | Cancelado* / Consertado* / Sem solução |
+| Cadastrado |  - |
+| Em atendimento |  - |
+| Finalizado | Cancelado* <br> Consertado* <br> Sem solução |
 
 ###### *Os resultados *"cancelado"* e *"consertado"* permitem que o chamado seja reativado por meio da alteração de seu status. Já o resultado *"sem solução"* não permite que o chamado seja reativado e seu status deve permanecer *"finalizado"*.
 
