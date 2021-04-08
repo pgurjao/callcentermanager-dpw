@@ -64,7 +64,7 @@ O sistema Call Center permite ao usuário cadastrar chamados, acompanhá-los, co
 ## Diagrama de Classes
 
 
-![Diagrama de classes - Call Center Manager - DPW v3](callcentermanager-dpw/assets/diagrama-de-classes-v3.png)
+![Diagrama de classes - Call Center Manager - DPW v3](callcentermanager-dpw/assets/diagrama-de-classes-v4.png)
 
 ## 
 
