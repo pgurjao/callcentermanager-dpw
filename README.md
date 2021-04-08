@@ -1,5 +1,8 @@
 # Instituto InfNet - Tecnologia Java - 2021/1
 
+
+
+
 #### Prova professor Veloso 
 #### Grupo: Daniel, Paulo, William
 
@@ -50,19 +53,12 @@ O sistema Call Center permite ao usuário cadastrar chamados, acompanhá-los, co
 
 ### Status do Chamado
 
-```
-_________________________________________________________
-|       Status        |     Resultado do atendimento    |
-|--------------------------------------------------------
-|     Cadastrado      |                                 |
-|--------------------------------------------------------
-|   Em atendimento    |                                 |
-|--------------------------------------------------------
-|                     |           Cancelado*            |
-|     Finalizado      |          Consertado*            |
-|                     |          Sem solução            |
-_________________________________________________________
-```
+| Status | Resultado do atendimento |
+| ----------- | :----: |
+| Cadastrado |   |
+| Em atendimento |   |
+| Finalizado | Cancelado* / Consertado* / Sem solução |
+
 ###### *Os resultados *"cancelado"* e *"consertado"* permitem que o chamado seja reativado por meio da alteração de seu status. Já o resultado *"sem solução"* não permite que o chamado seja reativado e seu status deve permanecer *"finalizado"*.
 
 ## Diagrama de Classes
