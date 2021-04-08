@@ -3,8 +3,8 @@ package br.edu.infnet.al.callcentermanager_dpw.modelo;
 public class Produto {
 	
 	private int idProduto;
-	private int numeroSerie;
 	private String nome;
+	private int numeroSerie;
 
 	public Produto(String nome) {
 		this.nome = nome;
@@ -13,6 +13,11 @@ public class Produto {
 	public Produto(int numeroSerie, String nome) {
 		this.numeroSerie = numeroSerie;
 		this.nome = nome;
+	}
+	
+	public boolean adicionarSolucao (Solucao solucao) {
+		
+		return true;
 	}
 
 	public int getIdProduto() {
