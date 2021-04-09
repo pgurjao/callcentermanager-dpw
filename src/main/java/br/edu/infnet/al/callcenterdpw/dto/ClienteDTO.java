@@ -1,5 +1,7 @@
 package br.edu.infnet.al.callcenterdpw.dto;
 
+import java.util.Arrays;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -38,6 +40,151 @@ public class ClienteDTO {
 		this.telefone = telefone;
 		this.endereco = endereco;
 		this.idContrato = idContrato;
+	}
+	
+	public boolean validarCpf(String cpf) {
+		
+		String caracteresValidos = "0123456789.-";
+		
+		if (cpf.length() > 14) {
+//			System.out.println("CPF INVALIDO! (L>14)");
+			return false;
+		}
+		
+		for (char c : cpf.toCharArray() ) {
+			if (caracteresValidos.indexOf(c) == -1 ) {
+//				System.out.println("CPF INVALIDO! (invalid char) ");
+				return false;
+			}
+		}
+		
+		if (cpf.indexOf(".") == 0 || cpf.indexOf("-") == 0
+				|| cpf.indexOf(".") == cpf.length() - 1
+				|| cpf.indexOf("-") == cpf.length() - 1 ) {
+//			System.out.println("CPF INVALIDO! (invalid format) ");
+			return false;
+		}
+		
+		cpf = cpf.replace(".", "");
+		cpf = cpf.replace("-", "");
+	
+		if (cpf.length() < 11) {
+			while (cpf.length() < 11) {
+				cpf = "0" + cpf;
+			}
+		} else {
+			if (cpf.length() > 11) {
+//				System.out.println("CPF INVALIDO! (L>11)");
+				return false;
+			}
+		}
+		
+		boolean todosDigitosRepetidos = false;
+		int contador = 0; 
+		char algarismoCpf = '0';
+		
+		do {
+			contador = 0;
+			for (char c : cpf.toCharArray() ) {
+				if (c == algarismoCpf ) {
+					todosDigitosRepetidos = true;
+					contador++;
+				} else {
+					todosDigitosRepetidos = false;
+				}
+			}
+			if (todosDigitosRepetidos == true && contador == 11) {
+//				System.out.println("CPF INVALIDO! (todosDigitosRepetidos)");
+				return false;
+			}
+			algarismoCpf = (char) (algarismoCpf + 1);
+		} while (algarismoCpf != ':');
+		
+		// String cpf validada, pronto para calcular digitos verificadores
+		
+		int multiplicador = 2;
+		int[] produtosMultiplicacao = new int[11];
+		int[] resultado = new int[11];
+		contador = 0;
+		
+		for (char c : cpf.toCharArray() ) {
+			resultado[contador] = Character.getNumericValue(c);
+			contador++;
+		}
+		
+		contador = 0;
+		for (int i = 8; i >= 0 ; i--) {
+			produtosMultiplicacao[i] = resultado[i] * multiplicador;
+			multiplicador++;
+		}
+		
+		int soma = 0;
+		for (int i = 0; i < 9 ; i++ ) {
+			soma = produtosMultiplicacao[i] + soma; 
+		}
+		
+		//Digito verificador 1
+		if ( soma % 11 < 2 ) {
+			resultado[9] = 0;
+		} else {
+			resultado[9] = 11 - (soma % 11);
+		}
+		
+		multiplicador = 2;
+		for (int i = 9; i >= 0 ; i--) {
+			produtosMultiplicacao[i] = resultado[i] * multiplicador;
+			multiplicador++;
+		}
+		
+		soma = 0;
+		for (int i = 0; i < 10 ; i++ ) {
+			soma = produtosMultiplicacao[i] + soma; 
+		}
+		
+		//Digito verificador 2
+		if ( soma % 11 < 2 ) {
+			resultado[10] = 0;
+		} else {
+			resultado[10] = 11 - (soma % 11);
+		}
+		
+//		System.out.println("CPF              = " + cpf.substring(0, 9) + "-" + cpf.substring(9, 11) );
+//		System.out.print("CPF calculado    = " + Arrays.toString(resultado).replaceAll("\\[|\\]|,|\\s", "").substring(0, 9) + "-" + Arrays.toString(resultado).replaceAll("\\[|\\]|,|\\s", "").substring(9, 11) );
+
+		if (cpf.equalsIgnoreCase(Arrays.toString(resultado).replaceAll("\\[|\\]|,|\\s", "") ) ) {
+//			System.out.println("CPF VALIDADO COM SUCESSO!");
+			return true;
+		} else {
+//			System.out.println("CPF INVALIDO! (digito verificador) ");
+			return false;
+		}
+	}
+	
+	public boolean validarNome (String nome) {
+
+		if(nome.length() >= 3) {
+			return true;
+		}
+
+		return false;
+	}
+
+	public boolean validarTelefone (String telefone) {
+
+		int numTelefone = Integer.parseInt(telefone);
+
+		if (numTelefone >= 1120000000) {
+			return true;
+		}
+		return false;
+	}
+
+	public boolean validarEndereco (String endereco) {
+
+		if (endereco.length() >= 5) {
+			return true;
+		}
+		return false;
 	}
 
 	public long getIdCliente() {
