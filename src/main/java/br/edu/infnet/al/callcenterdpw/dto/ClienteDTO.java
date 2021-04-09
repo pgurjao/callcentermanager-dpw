@@ -100,7 +100,7 @@ public class ClienteDTO {
 			algarismoCpf = (char) (algarismoCpf + 1);
 		} while (algarismoCpf != ':');
 		
-		// String cpf validada, pronto para calcular digitos verificadores
+		// String cpf validada, pronto para calcular digitos verificadores 
 		
 		int multiplicador = 2;
 		int[] produtosMultiplicacao = new int[11];
