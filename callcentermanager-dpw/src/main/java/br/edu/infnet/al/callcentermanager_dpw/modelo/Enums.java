@@ -13,4 +13,12 @@ public class Enums {
 		CONSERTADO,
 		SEM_SOLUCAO
 	}
+	
+	public static enum erros {
+		NOME_INVALIDO,
+		CPF_INVALIDO,
+		EMAIL_INVALIDO,
+		ENDERECO_INVALIDO,
+		
+	}
 }
