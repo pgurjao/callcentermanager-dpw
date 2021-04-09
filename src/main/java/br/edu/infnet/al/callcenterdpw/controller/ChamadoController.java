@@ -11,34 +11,34 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.edu.infnet.al.callcenterdpw.dto.ClienteDTO;
-import br.edu.infnet.al.callcenterdpw.service.ClienteService;
+import br.edu.infnet.al.callcenterdpw.dto.ChamadoDTO;
+import br.edu.infnet.al.callcenterdpw.service.ChamadoService;
+
 
 @RestController
-@RequestMapping("/cliente")
-public class ClienteController {
+@RequestMapping("/chamado")
+public class ChamadoController {
 	
 	@Autowired
-	private ClienteService clienteService;
+	private ChamadoService chamadoService;
 	
 	@GetMapping
-	public List<ClienteDTO> getCliente() {
-		return clienteService.getAll();
+	public List<ChamadoDTO> getChamado() {
+		return chamadoService.getAll();
 	}
 	
     @PostMapping
-    public ClienteDTO salvarCliente(@RequestBody ClienteDTO cliente) {
-        return clienteService.save(cliente);
+    public ChamadoDTO salvarChamado(@RequestBody ChamadoDTO chamado) {
+        return chamadoService.save(chamado);
     }
     
     @GetMapping("/{id}")
-    public ClienteDTO getCliente(@PathVariable Long id) {
-        Optional<ClienteDTO> cliente = clienteService.getById(id);
+    public ChamadoDTO getChamado(@PathVariable Long id) {
+        Optional<ChamadoDTO> chamado = chamadoService.getById(id);
 
-        if(cliente.isEmpty()) return null;
+        if(chamado.isEmpty()) return null;
 
-        return cliente.get();
+        return chamado.get();
     }
-
 
 }
