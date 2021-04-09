@@ -1,5 +1,7 @@
 package br.edu.infnet.al.callcenterdpw.dto;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -10,7 +12,9 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="chamado")
-public class ChamadoDTO {
+public class ChamadoDTO implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue
@@ -24,10 +28,10 @@ public class ChamadoDTO {
 	private String status;
 	private String resultado;
 	@ManyToOne(optional=false, fetch=FetchType.LAZY)
-	@JoinColumn(name="idCliente", referencedColumnName="id", insertable=false, updatable=false)
+	@JoinColumn(name="idCliente", referencedColumnName="idCliente", insertable=false, updatable=false)
 	private ClienteDTO cliente;
 	@ManyToOne(optional=false, fetch=FetchType.LAZY)
-	@JoinColumn(name="idProduto", referencedColumnName="id", insertable=false, updatable=false)
+	@JoinColumn(name="idProduto", referencedColumnName="idProduto", insertable=false, updatable=false)
 	private ProdutoDTO produto;
 
 

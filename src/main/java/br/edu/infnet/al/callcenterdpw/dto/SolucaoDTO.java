@@ -1,5 +1,7 @@
 package br.edu.infnet.al.callcenterdpw.dto;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -8,7 +10,9 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="solucao")
-public class SolucaoDTO {
+public class SolucaoDTO implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue

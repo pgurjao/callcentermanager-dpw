@@ -4,10 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import br.edu.infnet.al.callcenterdpw.dto.ContratoDTO;
 import br.edu.infnet.al.callcenterdpw.repository.ContratoRepository;
 
+@Service
 public class ContratoService {
 	
 	@Autowired

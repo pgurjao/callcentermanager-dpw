@@ -1,5 +1,6 @@
 package br.edu.infnet.al.callcenterdpw.dto;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
 import javax.persistence.Entity;
@@ -12,7 +13,9 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="cliente")
-public class ClienteDTO {
+public class ClienteDTO implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue
@@ -24,7 +27,7 @@ public class ClienteDTO {
 	private String telefone;
 	private String endereco;
 	@ManyToOne(optional=false, fetch=FetchType.LAZY)
-	@JoinColumn(name="idContrato", referencedColumnName="id", insertable=false, updatable=false)
+	@JoinColumn(name="idContrato", referencedColumnName="idContrato", insertable=false, updatable=false)
 	private ContratoDTO contrato;
 	
 	public ClienteDTO() {
