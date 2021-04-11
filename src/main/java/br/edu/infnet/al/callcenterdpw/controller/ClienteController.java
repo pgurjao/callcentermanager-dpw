@@ -48,7 +48,7 @@ public class ClienteController {
     		erro = "Email invalido, deve ser no formato *@*.*";
     	
     	if (!cDto.validarTelefone(cliente.getTelefone() ) )
-    		erro = "Telefone invalido, deve conter apenas numeros e ser no formato DDD (2 numeros) + telefone (8 numeros). Exemplo: 1123450001";
+    		erro = "Telefone invalido, deve conter apenas numeros e ser no formato DDD (2 numeros) + telefone (8 ou 9 numeros). Exemplo: 1123450001 ou 11998763344";
     	
     	if (!cDto.validarEndereco(cliente.getEndereco() ) )
     		erro = "Endereco invalido, deve possuir pelo menos 5 caracteres";

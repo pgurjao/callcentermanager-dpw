@@ -174,14 +174,19 @@ public class ClienteDTO implements Serializable {
 
 	public boolean validarTelefone (String telefone) {
 
-		Integer numTelefone = null;
+		Long numTelefone = null;
+		long telefoneMinimo = 1120000000L;
+		long telefoneMaximo = 99999999999L;
+		
 		try {
-			numTelefone = Integer.parseInt(telefone);
+			numTelefone = Long.parseLong(telefone);
 		} catch (NumberFormatException e) {
 			return false;
 		} finally {
 			if (numTelefone != null) {
-				if (numTelefone >= 1120000000) {
+				System.out.println(numTelefone);
+				System.out.println(1120000000);
+				if (numTelefone >= telefoneMinimo && numTelefone <= telefoneMaximo ) {
 					return true;
 				}
 			}
