@@ -19,7 +19,12 @@ public class ClienteService {
 	        return (List<ClienteDTO>) clienteRepository.findAll();
 	    }
 	   public ClienteDTO save(ClienteDTO cliente) {
-		  return clienteRepository.save(cliente);
+		  
+		   if (cliente == null) {
+			   return null;
+		   }
+		   
+		   return clienteRepository.save(cliente);
 	   }
 		public Optional<ClienteDTO> getById(Long id) {
 			return clienteRepository.findById(id);

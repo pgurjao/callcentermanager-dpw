@@ -174,10 +174,17 @@ public class ClienteDTO implements Serializable {
 
 	public boolean validarTelefone (String telefone) {
 
-		int numTelefone = Integer.parseInt(telefone);
-
-		if (numTelefone >= 1120000000) {
-			return true;
+		Integer numTelefone = null;
+		try {
+			numTelefone = Integer.parseInt(telefone);
+		} catch (NumberFormatException e) {
+			return false;
+		} finally {
+			if (numTelefone != null) {
+				if (numTelefone >= 1120000000) {
+					return true;
+				}
+			}
 		}
 		return false;
 	}
@@ -188,6 +195,25 @@ public class ClienteDTO implements Serializable {
 			return true;
 		}
 		return false;
+	}
+	
+	public boolean validarEmail (String email) {
+
+		if (email.length() >= 5 ) {
+			if (email.indexOf('@') == email.lastIndexOf('@') && email.indexOf('@') > 0 ) {
+				if (email.lastIndexOf('.') - email.lastIndexOf('@') > 1 ) {
+					if (email.charAt(email.length()-1 ) != '.' ) {
+						if (email.charAt(email.lastIndexOf('@') - 1 ) != '.' ) {
+							if (email.charAt(email.lastIndexOf('@') + 1 ) != '.' ) {
+								if (email.charAt(0) != '.')
+									return true;
+							}
+						}
+					}
+				}
+			}
+		} 
+		return false;		
 	}
 
 	public long getIdCliente() {
