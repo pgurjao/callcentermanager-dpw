@@ -29,14 +29,39 @@ public class ClienteController {
 		return clienteService.getAll();
 	}
 	
-    @PostMapping
+    @GetMapping("/{id}")
+	public ClienteDTO getCliente(@PathVariable Long id) {
+	    Optional<ClienteDTO> cliente = clienteService.getById(id);
+	
+	    if(cliente.isEmpty()) return null;
+	
+	    return cliente.get();
+	}
+
+	@PostMapping
     public ClienteDTO salvarCliente(@RequestBody ClienteDTO cliente, HttpServletResponse response) {
     	
     	String erro = null;
     	int erroNum = 406;
+    	String cpf = cliente.getCpf();
     	
-    	if (!cliente.validarCpf(cliente.getCpf() ) )
+    	if (!cliente.validarCpf(cliente.getCpf() ) ) {
     		erro = "CPF invalido";
+    	} else {
+    		cpf = cpf.strip();
+    		cpf = cpf.replace(".", "");
+    		cpf = cpf.replace("-", "");
+    		
+    		
+    		System.out.println("cpf limpo: " + cpf);
+    		if (cpf.length() < 11) {
+    			while (cpf.length() < 11) {
+    				cpf = "0" + cpf;
+    			}
+    		}
+    		System.out.println("cpf depois de acrescentados zeros a esquerda: " + cpf);
+    		cliente.setCpf(cpf);
+    	}
     	
     	if (clienteService.checkIfCpfExists(cliente.getCpf() ) )
     		erro = "O CPF ja existe na base de dados";
@@ -66,13 +91,45 @@ public class ClienteController {
 		}
     	return null;
     }
-    
-    @GetMapping("/{id}")
-    public ClienteDTO getCliente(@PathVariable Long id) {
-        Optional<ClienteDTO> cliente = clienteService.getById(id);
 
-        if(cliente.isEmpty()) return null;
 
-        return cliente.get();
-    }
+	@PostMapping("/fixdb/{id}")
+	public ClienteDTO getClienteToFix(@PathVariable Long id, HttpServletResponse response) {
+		
+		Optional<ClienteDTO> cliente = clienteService.getById(id);
+		
+		ClienteDTO cDto = new ClienteDTO();
+		
+		String erro = "Cliente nao encontrado";
+		String cpf;
+		int erroNum = 404;
+
+		if(cliente.isEmpty() || !cliente.isPresent() ) {
+			response.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
+
+			try {
+				response.sendError(erroNum, erro);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
+
+		cDto = cliente.get();
+		cpf = cDto.getCpf();
+		
+		if (clienteService.checkIfCpfExists(cpf) ) {
+			erro = "O CPF ja existe na base de dados";
+			response.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
+
+			try {
+				response.sendError(erroNum, erro);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
+		return cDto;
+	}
+
 }
