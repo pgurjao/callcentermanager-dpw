@@ -32,12 +32,14 @@ public class ClienteController {
     @PostMapping
     public ClienteDTO salvarCliente(@RequestBody ClienteDTO cliente, HttpServletResponse response) {
     	
-//    	ClienteDTO cDto = new ClienteDTO();
     	String erro = null;
     	int erroNum = 406;
     	
     	if (!cliente.validarCpf(cliente.getCpf() ) )
     		erro = "CPF invalido";
+    	
+    	if (clienteService.checkIfCpfExists(cliente.getCpf() ) )
+    		erro = "O CPF ja existe na base de dados";
     	
     	if (!cliente.validarNome(cliente.getNome() ) )
     		erro = "Nome invalido, deve possuir pelo menos 3 caracteres";
@@ -52,7 +54,6 @@ public class ClienteController {
     		erro = "Endereco invalido, deve possuir pelo menos 5 caracteres";
     	
     	if (erro == null ) {
-//    		System.out.println("Dados cliente sao validos, salvando...");
     		return clienteService.save(cliente);
     	}
     	
@@ -74,12 +75,4 @@ public class ClienteController {
 
         return cliente.get();
     }
-    
-//    @RequestMapping(value = "/controller", method = RequestMethod.GET)
-//    @ResponseBody
-//    public ResponseEntity sendViaResponseEntity() {
-//        return new ResponseEntity(HttpStatus.NOT_ACCEPTABLE);
-//    }
-
-
 }

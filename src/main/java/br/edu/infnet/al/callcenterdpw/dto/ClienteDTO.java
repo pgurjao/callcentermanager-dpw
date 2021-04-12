@@ -158,7 +158,7 @@ public class ClienteDTO implements Serializable {
 //			System.out.println("CPF VALIDADO COM SUCESSO!");
 			return true;
 		} else {
-//			System.out.println("CPF INVALIDO! (digito verificador) ");
+//			System.out.println("CPF INVALIDO! (digito verificador invalido) ");
 			return false;
 		}
 	}
