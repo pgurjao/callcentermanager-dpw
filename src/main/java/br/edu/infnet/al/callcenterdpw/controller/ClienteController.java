@@ -7,8 +7,6 @@ import java.util.Optional;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.http.HttpStatus;
-//import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,23 +32,23 @@ public class ClienteController {
     @PostMapping
     public ClienteDTO salvarCliente(@RequestBody ClienteDTO cliente, HttpServletResponse response) {
     	
-    	ClienteDTO cDto = new ClienteDTO();
+//    	ClienteDTO cDto = new ClienteDTO();
     	String erro = null;
     	int erroNum = 406;
     	
-    	if (!cDto.validarCpf(cliente.getCpf() ) )
+    	if (!cliente.validarCpf(cliente.getCpf() ) )
     		erro = "CPF invalido";
     	
-    	if (!cDto.validarNome(cliente.getNome() ) )
+    	if (!cliente.validarNome(cliente.getNome() ) )
     		erro = "Nome invalido, deve possuir pelo menos 3 caracteres";
     	
-    	if (!cDto.validarEmail(cliente.getEmail() ) )
+    	if (!cliente.validarEmail(cliente.getEmail() ) )
     		erro = "Email invalido, deve ser no formato *@*.*";
     	
-    	if (!cDto.validarTelefone(cliente.getTelefone() ) )
+    	if (!cliente.validarTelefone(cliente.getTelefone() ) )
     		erro = "Telefone invalido, deve conter apenas numeros e ser no formato DDD (2 numeros) + telefone (8 ou 9 numeros). Exemplo: 1123450001 ou 11998763344";
     	
-    	if (!cDto.validarEndereco(cliente.getEndereco() ) )
+    	if (!cliente.validarEndereco(cliente.getEndereco() ) )
     		erro = "Endereco invalido, deve possuir pelo menos 5 caracteres";
     	
     	if (erro == null ) {

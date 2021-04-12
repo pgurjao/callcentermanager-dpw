@@ -31,6 +31,22 @@ public class SolucaoDTO implements Serializable {
 		this.detalhamentoCompleto = detalhamentoCompleto;
 	}
 
+	public boolean validarTitulo (String titulo) {
+		
+		if (titulo.length() <= 4 ) {
+			return false;
+		}
+		return true;
+	}
+	
+	public boolean validarDetalhamentoCompleto (String detalhamentoCompleto) {
+		
+		if (detalhamentoCompleto.length() <= 5 ) {
+			return false;
+		}
+		return true;
+	}
+	
 	public long getIdSolucao() {
 		return idSolucao;
 	}
