@@ -184,8 +184,6 @@ public class ClienteDTO implements Serializable {
 			return false;
 		} finally {
 			if (numTelefone != null) {
-				System.out.println(numTelefone);
-				System.out.println(1120000000);
 				if (numTelefone >= telefoneMinimo && numTelefone <= telefoneMaximo ) {
 					return true;
 				}
