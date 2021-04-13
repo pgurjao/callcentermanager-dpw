@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.infnet.al.callcenterdpw.dto.ChamadoDTO;
+import br.edu.infnet.al.callcenterdpw.dto.Enums;
 import br.edu.infnet.al.callcenterdpw.service.ChamadoService;
 
 
@@ -32,7 +33,10 @@ public class ChamadoController {
 	//adicionar chamados
     @PostMapping
     public ChamadoDTO salvarChamado(@RequestBody ChamadoDTO chamado) {
-        return chamadoService.save(chamado);
+        
+    	chamado.setStatus(Enums.statusChamado.CADASTRADO.toString() );
+    	
+    	return chamadoService.save(chamado);
     }
     
     
