@@ -22,16 +22,21 @@ public class ChamadoController {
 	@Autowired
 	private ChamadoService chamadoService;
 	
+	//consultar todos os chamados
 	@GetMapping
 	public List<ChamadoDTO> getChamado() {
 		return chamadoService.getAll();
 	}
 	
+	
+	//adicionar chamados
     @PostMapping
     public ChamadoDTO salvarChamado(@RequestBody ChamadoDTO chamado) {
         return chamadoService.save(chamado);
     }
     
+    
+    //pesquisar chamados por id
     @GetMapping("/{id}")
     public ChamadoDTO getChamado(@PathVariable Long id) {
         Optional<ChamadoDTO> chamado = chamadoService.getById(id);
@@ -41,4 +46,8 @@ public class ChamadoController {
         return chamado.get();
     }
 
+    //reativar chamadoo
+    public ChamadoDTO reativarChamado(@PathVariable Long id) {
+    	return chamadoService.reOpen(id);
+    }
 }
