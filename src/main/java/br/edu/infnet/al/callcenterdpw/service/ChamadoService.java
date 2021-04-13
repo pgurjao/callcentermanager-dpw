@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.edu.infnet.al.callcenterdpw.dto.ChamadoDTO;
+import br.edu.infnet.al.callcenterdpw.dto.Enums.resultadoChamado;
+import br.edu.infnet.al.callcenterdpw.dto.Enums.statusChamado;
 import br.edu.infnet.al.callcenterdpw.repository.ChamadoRepository;
 
 
@@ -26,6 +28,15 @@ public class ChamadoService {
 	//Optional porque o retorno pode ser nulo 
 	public Optional<ChamadoDTO> getById(Long id) {
 		return chamadoRepository.findById(id);
+	}
+
+	//reabrir chamado **Work in progress**
+	public ChamadoDTO reOpen(Long id) {
+		Optional<ChamadoDTO> chamado = chamadoRepository.findById(id);
+		if (chamado.getResultado() != resultadoChamado.SEM_SOLUCAO) {
+				return chamado.setStatus(statusChamado.EM_ATENDIMENTO);
+		}
+		return null;
 	}
 
 }
