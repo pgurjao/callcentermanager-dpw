@@ -46,7 +46,7 @@ public class ChamadoController {
         return chamado.get();
     }
 
-    //reativar chamado
+    //reativar chamadoo
     public ChamadoDTO reativarChamado(@PathVariable Long id) {
     	return chamadoService.reOpen(id);
     }

@@ -30,7 +30,7 @@ public class ChamadoService {
 		return chamadoRepository.findById(id);
 	}
 
-	//reabrir chamado **Work in progress**
+	//reabrir chamado
 	public ChamadoDTO reOpen(Long id) {
 		Optional<ChamadoDTO> chamado = chamadoRepository.findById(id);
 		if (chamado.getResultado() != resultadoChamado.SEM_SOLUCAO) {
