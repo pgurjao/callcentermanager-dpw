@@ -33,8 +33,16 @@ public class ChamadoService {
 	//reabrir chamado
 	public ChamadoDTO reOpen(Long id) {
 		Optional<ChamadoDTO> chamado = chamadoRepository.findById(id);
-		if (chamado.getResultado() != resultadoChamado.SEM_SOLUCAO) {
-				return chamado.setStatus(statusChamado.EM_ATENDIMENTO);
+
+		if(chamado.isEmpty() )
+			return null;
+
+		ChamadoDTO cDTO = new ChamadoDTO();
+		cDTO = chamado.get();
+
+		if (cDTO.getResultado() != resultadoChamado.SEM_SOLUCAO.toString() ) {
+			cDTO.setStatus(statusChamado.EM_ATENDIMENTO.toString() );
+			return cDTO;
 		}
 		return null;
 	}
