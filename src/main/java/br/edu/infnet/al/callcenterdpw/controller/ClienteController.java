@@ -7,8 +7,6 @@ import java.util.Optional;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.http.HttpStatus;
-//import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,30 +29,56 @@ public class ClienteController {
 		return clienteService.getAll();
 	}
 	
-    @PostMapping
+    @GetMapping("/{id}")
+	public ClienteDTO getCliente(@PathVariable Long id) {
+	    Optional<ClienteDTO> cliente = clienteService.getById(id);
+	
+	    if(cliente.isEmpty()) return null;
+	
+	    return cliente.get();
+	}
+
+	@PostMapping
     public ClienteDTO salvarCliente(@RequestBody ClienteDTO cliente, HttpServletResponse response) {
     	
-    	ClienteDTO cDto = new ClienteDTO();
     	String erro = null;
     	int erroNum = 406;
+    	String cpf = cliente.getCpf();
     	
-    	if (!cDto.validarCpf(cliente.getCpf() ) )
+    	if (!cliente.validarCpf(cliente.getCpf() ) ) {
     		erro = "CPF invalido";
+    	} else {
+    		cpf = cpf.strip();
+    		cpf = cpf.replace(".", "");
+    		cpf = cpf.replace("-", "");
+    		
+    		
+    		System.out.println("cpf limpo: " + cpf);
+    		if (cpf.length() < 11) {
+    			while (cpf.length() < 11) {
+    				cpf = "0" + cpf;
+    			}
+    		}
+    		System.out.println("cpf depois de acrescentados zeros a esquerda: " + cpf);
+    		cliente.setCpf(cpf);
+    	}
     	
-    	if (!cDto.validarNome(cliente.getNome() ) )
+    	if (clienteService.checkIfCpfExists(cliente.getCpf() ) )
+    		erro = "O CPF ja existe na base de dados";
+    	
+    	if (!cliente.validarNome(cliente.getNome() ) )
     		erro = "Nome invalido, deve possuir pelo menos 3 caracteres";
     	
-    	if (!cDto.validarEmail(cliente.getEmail() ) )
+    	if (!cliente.validarEmail(cliente.getEmail() ) )
     		erro = "Email invalido, deve ser no formato *@*.*";
     	
-    	if (!cDto.validarTelefone(cliente.getTelefone() ) )
+    	if (!cliente.validarTelefone(cliente.getTelefone() ) )
     		erro = "Telefone invalido, deve conter apenas numeros e ser no formato DDD (2 numeros) + telefone (8 ou 9 numeros). Exemplo: 1123450001 ou 11998763344";
     	
-    	if (!cDto.validarEndereco(cliente.getEndereco() ) )
+    	if (!cliente.validarEndereco(cliente.getEndereco() ) )
     		erro = "Endereco invalido, deve possuir pelo menos 5 caracteres";
     	
     	if (erro == null ) {
-//    		System.out.println("Dados cliente sao validos, salvando...");
     		return clienteService.save(cliente);
     	}
     	
@@ -67,21 +91,45 @@ public class ClienteController {
 		}
     	return null;
     }
-    
-    @GetMapping("/{id}")
-    public ClienteDTO getCliente(@PathVariable Long id) {
-        Optional<ClienteDTO> cliente = clienteService.getById(id);
 
-        if(cliente.isEmpty()) return null;
 
-        return cliente.get();
-    }
-    
-//    @RequestMapping(value = "/controller", method = RequestMethod.GET)
-//    @ResponseBody
-//    public ResponseEntity sendViaResponseEntity() {
-//        return new ResponseEntity(HttpStatus.NOT_ACCEPTABLE);
-//    }
+	@PostMapping("/fixdb/{id}")
+	public ClienteDTO getClienteToFix(@PathVariable Long id, HttpServletResponse response) {
+		
+		Optional<ClienteDTO> cliente = clienteService.getById(id);
+		
+		ClienteDTO cDto = new ClienteDTO();
+		
+		String erro = "Cliente nao encontrado";
+		String cpf;
+		int erroNum = 404;
 
+		if(cliente.isEmpty() || !cliente.isPresent() ) {
+			response.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
+
+			try {
+				response.sendError(erroNum, erro);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
+
+		cDto = cliente.get();
+		cpf = cDto.getCpf();
+		
+		if (clienteService.checkIfCpfExists(cpf) ) {
+			erro = "O CPF ja existe na base de dados";
+			response.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
+
+			try {
+				response.sendError(erroNum, erro);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
+		return cDto;
+	}
 
 }

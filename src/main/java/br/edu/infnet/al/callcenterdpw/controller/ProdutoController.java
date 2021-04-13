@@ -1,7 +1,10 @@
 package br.edu.infnet.al.callcenterdpw.controller;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,8 +30,30 @@ public class ProdutoController {
     }
 
     @PostMapping
-    public ProdutoDTO salvaProduto(@RequestBody ProdutoDTO produto) {
-        return produtoService.save(produto);
+    public ProdutoDTO salvaProduto(@RequestBody ProdutoDTO produto, HttpServletResponse response) {
+    	
+    	String erro = null;
+    	int erroNum = 406;
+    	
+    	if (!produto.validarNome(produto.getNome() ) )
+    		erro = "Nome invalido, deve ter no minimo 3 caracteres";
+    	
+    	if (!produto.validarNumeroSerie(produto.getNumeroSerie() ) )
+    		erro = "Numero de serie invalido, deve ser um numero maior que zero";
+    	
+    	if (erro == null ) {
+//    		System.out.println("Dados cliente sao validos, salvando...");
+    		return produtoService.save(produto);
+    	}
+    	
+    	response.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
+    	
+    	try {
+			response.sendError(erroNum, erro);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    	return null;
     }
 
     @GetMapping("/{id}")

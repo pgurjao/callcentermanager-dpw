@@ -1,7 +1,10 @@
 package br.edu.infnet.al.callcenterdpw.controller;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,8 +31,30 @@ public class SolucaoController {
     }
 
     @PostMapping
-    public SolucaoDTO salvaSolucao(@RequestBody SolucaoDTO solucao) {
-        return solucaoService.save(solucao);
+    public SolucaoDTO salvaSolucao(@RequestBody SolucaoDTO solucao, HttpServletResponse response) {
+        
+    	String erro = null;
+    	int erroNum = 406;
+    	
+    	if (!solucao.validarTitulo(solucao.getTitulo() ) )
+    		erro = "Titulo invalido, deve ter no minimo 4 caracteres";
+    	
+    	if (!solucao.validarDetalhamentoCompleto(solucao.getDetalhamentoCompleto() ) )
+    		erro = "Detalhamento invalido, deve ter no minimo 5 caracteres";
+    	
+    	if (erro == null ) {
+//    		System.out.println("Dados cliente sao validos, salvando...");
+    		return solucaoService.save(solucao);
+    	}
+    	
+    	response.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
+    	
+    	try {
+			response.sendError(erroNum, erro);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    	return null;
     }
 
     @GetMapping("/{id}")

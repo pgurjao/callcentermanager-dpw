@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.lang.NonNull;
+
 @Entity
 @Table(name="produto")
 public class ProdutoDTO implements Serializable {
@@ -16,7 +18,9 @@ public class ProdutoDTO implements Serializable {
 	@Id
 	@GeneratedValue
 	private long idProduto;
+	@NonNull
 	private String nome;
+	@NonNull
 	private int numeroSerie;
 	
 	public ProdutoDTO() {
@@ -28,6 +32,24 @@ public class ProdutoDTO implements Serializable {
 		this.idProduto = idProduto;
 		this.nome = nome;
 		this.numeroSerie = numeroSerie;
+	}
+	
+	public boolean validarNome (String nome) {
+
+		if(nome.length() >= 3) {
+			return true;
+		}
+
+		return false;
+	}
+	
+	public boolean validarNumeroSerie (int numeroSerie) {
+
+		if(numeroSerie > 0) {
+			return true;
+		}
+
+		return false;
 	}
 
 	public long getIdProduto() {

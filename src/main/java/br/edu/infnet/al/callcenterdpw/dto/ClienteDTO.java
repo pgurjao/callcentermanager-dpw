@@ -158,7 +158,7 @@ public class ClienteDTO implements Serializable {
 //			System.out.println("CPF VALIDADO COM SUCESSO!");
 			return true;
 		} else {
-//			System.out.println("CPF INVALIDO! (digito verificador) ");
+//			System.out.println("CPF INVALIDO! (digito verificador invalido) ");
 			return false;
 		}
 	}
@@ -184,8 +184,6 @@ public class ClienteDTO implements Serializable {
 			return false;
 		} finally {
 			if (numTelefone != null) {
-				System.out.println(numTelefone);
-				System.out.println(1120000000);
 				if (numTelefone >= telefoneMinimo && numTelefone <= telefoneMaximo ) {
 					return true;
 				}
