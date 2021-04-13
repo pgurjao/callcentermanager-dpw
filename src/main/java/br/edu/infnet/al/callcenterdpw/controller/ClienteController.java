@@ -52,19 +52,16 @@ public class ClienteController {
     		cpf = cpf.replace(".", "");
     		cpf = cpf.replace("-", "");
     		
-    		
-    		System.out.println("cpf limpo: " + cpf);
     		if (cpf.length() < 11) {
     			while (cpf.length() < 11) {
     				cpf = "0" + cpf;
     			}
     		}
-    		System.out.println("cpf depois de acrescentados zeros a esquerda: " + cpf);
     		cliente.setCpf(cpf);
     	}
     	
     	if (clienteService.checkIfCpfExists(cliente.getCpf() ) )
-    		erro = "O CPF ja existe na base de dados";
+    		erro = "O CPF ja esta associado a outro cliente na base de dados";
     	
     	if (!cliente.validarNome(cliente.getNome() ) )
     		erro = "Nome invalido, deve possuir pelo menos 3 caracteres";
@@ -72,8 +69,14 @@ public class ClienteController {
     	if (!cliente.validarEmail(cliente.getEmail() ) )
     		erro = "Email invalido, deve ser no formato *@*.*";
     	
+    	if (clienteService.checkIfEmailExists(cliente.getEmail() ) )
+    		erro = "O email ja esta associado a outro cliente na base de dados";
+    	
     	if (!cliente.validarTelefone(cliente.getTelefone() ) )
     		erro = "Telefone invalido, deve conter apenas numeros e ser no formato DDD (2 numeros) + telefone (8 ou 9 numeros). Exemplo: 1123450001 ou 11998763344";
+    	
+    	if (clienteService.checkIfTelefoneExists(cliente.getTelefone() ) )
+    		erro = "O telefone ja esta associado a outro cliente na base de dados";
     	
     	if (!cliente.validarEndereco(cliente.getEndereco() ) )
     		erro = "Endereco invalido, deve possuir pelo menos 5 caracteres";
@@ -91,45 +94,4 @@ public class ClienteController {
 		}
     	return null;
     }
-
-
-	@PostMapping("/fixdb/{id}")
-	public ClienteDTO getClienteToFix(@PathVariable Long id, HttpServletResponse response) {
-		
-		Optional<ClienteDTO> cliente = clienteService.getById(id);
-		
-		ClienteDTO cDto = new ClienteDTO();
-		
-		String erro = "Cliente nao encontrado";
-		String cpf;
-		int erroNum = 404;
-
-		if(cliente.isEmpty() || !cliente.isPresent() ) {
-			response.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
-
-			try {
-				response.sendError(erroNum, erro);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			return null;
-		}
-
-		cDto = cliente.get();
-		cpf = cDto.getCpf();
-		
-		if (clienteService.checkIfCpfExists(cpf) ) {
-			erro = "O CPF ja existe na base de dados";
-			response.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
-
-			try {
-				response.sendError(erroNum, erro);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			return null;
-		}
-		return cDto;
-	}
-
 }

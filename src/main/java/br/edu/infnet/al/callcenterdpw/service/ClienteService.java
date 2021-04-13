@@ -54,8 +54,43 @@ public class ClienteService {
 		return false;
 	}
 
+	public boolean checkIfEmailExists(String emailClienteNovo) {
+		
+		List<ClienteDTO> clienteList = new ArrayList<ClienteDTO>();
+		String emailDaLista;
+		
+		clienteList  = this.getAll();
+		
+		for (ClienteDTO cDto : clienteList) {
+			
+			emailDaLista = cDto.getEmail();
+			if (emailDaLista.equalsIgnoreCase(emailClienteNovo) ) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+
+	public boolean checkIfTelefoneExists(String telefoneClienteNovo) {
+		
+		List<ClienteDTO> clienteList = new ArrayList<ClienteDTO>();
+		String telefoneDaLista;
+		
+		clienteList  = this.getAll();
+		
+		for (ClienteDTO cDto : clienteList) {
+			
+			telefoneDaLista = cDto.getTelefone();
+			if (telefoneDaLista.equalsIgnoreCase(telefoneClienteNovo) ) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+
 	public Optional<ClienteDTO> getById(Long id) {
 		return clienteRepository.findById(id);
 	}
-
 }
