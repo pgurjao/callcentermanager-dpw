@@ -70,11 +70,12 @@ O sistema Call Center permite ao usuário cadastrar chamados, acompanhá-los, co
 
 ### TO DO
 
-- [ ] Permissionamento no Github para Daniel e Paulo fazerem commits no repositório
-- [ ] Fazer método `Cliente` (Paulo)
-- [ ] Fazer método `Produto` (Daniel)
-- [ ] Fazer método `Contrato` (William)
-- [ ] Fazer método `Chamado` (todos)
+- [x] Incluir funcionalidade que impeça mais de um cliente ter o mesmo CPF, Telefone ou Email.
+- [x] Permissionamento no Github para Daniel e Paulo fazerem commits no repositório
+- [x] Fazer método `Cliente` (Paulo)
+- [x] Fazer método `Produto` (Daniel)
+- [x] Fazer método `Contrato` (William)
+- [x] Fazer método `Chamado` (todos)
 - [x] ~~Escolher se a~~ implementação será micro serviço ~~ou aplicação em console~~
 - [x] Escolher MVC ~~ou DDD~~
 - [x] Diagrama de classes, etc...
