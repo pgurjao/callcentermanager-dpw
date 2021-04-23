@@ -48,7 +48,7 @@ public class ProdutoDTO implements Serializable {
 		if(numeroSerie > 0) {
 			return true;
 		}
-
+		
 		return false;
 	}
 

@@ -273,5 +273,6 @@ public class ClienteDTO implements Serializable {
 
 	public Long getIdContrato() {
 		return idContrato;
-	}	
+	}
+	
 }
